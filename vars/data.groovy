@@ -1,5 +1,3 @@
-import groovy.json.JsonBuilder  
-import groovy.json.JsonSlurper  
 
 def cleanWorkspace()
     {
@@ -11,10 +9,5 @@ def cleanWorkspace()
             deleteDir()            
         }
     }
-def getECRName(){
-    String repo = steps.sh(returnStdout: true, script: "aws ecr get-login --region us-west-2 --no-include-email | cut -d \" \" -f 7" ).trim()
-    return repo.replace("https://", "")
-}
-
 
 
