@@ -67,4 +67,18 @@ def createDockerRegistry(def dockerRepo) {
         }
     }
 }
-
+def createDockerfile(){
+    if (fileExists('pom.xml')){
+        def dockerfile = libraryResource 'Dockerfile.gradle'
+        println('Identified as Gradle prject...')
+        if (fileExists('Dockerfile')){
+            println('\tDockerfile exists not creating...')
+        }
+        else{
+            writeFile file: 'Dockerfile', text: dockerfile
+        }
+    }
+    else{
+        println('Unable to identify build type, not creating dockerfile...')
+    }
+}
