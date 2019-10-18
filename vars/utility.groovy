@@ -82,3 +82,18 @@ def createDockerfile(){
         println('Unable to identify build type, not creating dockerfile...')
     }
 }
+
+def createJenkinsfile(){
+    if (fileExists('pom.xml')){
+        if (fileExists('Jenkinsfile')){
+            println('\tJenkinsfile exists not creating...')
+        }
+        else{
+            println('Creating Jenkinsfile for gradle project...')
+            writeFile file: 'Jenkinsfile', text: '@Library(\'pipeline-library-demo\') _\nmvnBuild(deploy: true)'
+        }
+    }
+    else{
+        println('Unable to identify build type, not creating Jenkinsfile...')
+    }
+}
